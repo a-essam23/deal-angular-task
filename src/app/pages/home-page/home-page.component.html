@@ -1,0 +1,21 @@
+<div class="h-screen flex flex-col justify-center items-center bg-slate-50">
+  <app-modal
+    [isVisible]="(modalVisible$ | async)!"
+    title="ارسال رسالة لعقاريين محددين"
+    subTitle="من هنا يمكنك كتابة رسالة لأكثر من عقاري لتحفزه لتلقي طلب تسويق المالك"
+    confirmLabel="إرسال"
+    (onConfirm)="send()"
+  >
+    <ul class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+      <li *ngFor="let user of users$ | async">
+        <app-user-card [user]="user" (onChange)="onUserSelectChange($event)" ></app-user-card>
+      </li>
+    </ul>
+  </app-modal>
+  <button
+    (click)="showModal()"
+    class="transition py-4 px-6 text-lg hover:-translate-y-1 bg-primary hover:bg-primary-hover"
+  >
+    رسالة مجمعة
+  </button>
+</div>

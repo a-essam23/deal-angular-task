@@ -1,0 +1,35 @@
+<ng-container *ngIf="isVisible">
+  <div title="" class="top-0 left-0 fixed w-screen h-screen bg-black/20"></div>
+  <div
+    class="w-[calc(100%-20px)] absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 h-[calc(100vh-20px)] lg:max-w-4xl bg-white shadow rounded-lg flex flex-col overflow-hidden z-[999]"
+  >
+    <div class="bg-[#F7F9FA] flex flex-col p-7 gap-1 shadow">
+      <div class="flex justify-between h-max items-center">
+        <h2 class="text-lg leading-3 font-medium text-center">{{ title }}</h2>
+        <button
+          (click)="emitOnExit()"
+          class="transition relative w-6 h-6 flex bg-white hover:brightness-95 active:brightness-100 items-center justify-center flex-col rounded-md"
+        >
+          <div class="absolute w-[15px] h-0.5 bg-neutral-400 rotate-45"></div>
+          <div class="absolute w-[15px] h-0.5 bg-neutral-400 -rotate-45"></div>
+        </button>
+      </div>
+      <h3 class="text-sm leading-5 font-normal">{{ subTitle }}</h3>
+    </div>
+    <div
+      class="shadow border-t border-neutral-200 py-5 px-6 flex-grow overflow-clip gap-6"
+    >
+      <ng-content></ng-content>
+    </div>
+    <ng-container *ngIf="confirmLabel">
+      <div class="h-[78px] flex items-center justify-end py-5 px-6">
+        <button
+          (click)="emitConfirm()"
+          class="transition py-[9px] px-[17px] bg-neutral-n100 hover:bg-neutral-n200 active:bg-neutral-n100 border-neutral-100 border rounded-md"
+        >
+          {{ confirmLabel }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
