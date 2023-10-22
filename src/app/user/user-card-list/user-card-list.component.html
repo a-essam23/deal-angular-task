@@ -7,14 +7,14 @@
       <input
         class="checkbox"
         type="checkbox"
-        [(ngModel)]="allSelected"
-        (ngModelChange)="selectAll($event)"
+        [checked]="allSelected$ | async"
+        (change)="selectAll($event)"
       />
       <span class="text-sm leading-5 font-medium text-right">تحديد الكل</span>
     </div>
   </div>
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <li *ngFor="let user of (users$ | async)! | paginate : (config | async)!">
+    <li *ngFor="let user of users$ | async">
       <app-user-card [user]="user"></app-user-card>
     </li>
   </ul>

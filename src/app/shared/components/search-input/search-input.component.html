@@ -1,6 +1,12 @@
-<input
-  [(ngModel)]="searchVal"
-  (ngModelChange)="searchValChange.emit($event)"
-  placeholder="اسم العقاري"
-  class="input-text w-full"
-/>
+<div class="input-container w-full flex gap-2">
+  <img
+    class="stroke-gray-400"
+    src="../../../../assets/icons/search.svg"
+    alt="search-icon"
+  />
+  <input
+    [(ngModel)]="searchVal"
+    (ngModelChange)="searchValChange.emit($event)"
+    placeholder="اسم العقاري"
+  />
+</div>

@@ -8,12 +8,39 @@
   ></app-text-box>
   <app-filter-tab class="w-full"></app-filter-tab>
   <app-user-card-list></app-user-card-list>
-  <pagination-controls
-    class="w-full"
-    (pageChange)="changePage($event)"
-    previousLabel="السابق"
-    nextLabel="التالي"
-    [directionLinks]="true"
-    [responsive]="false"
-  ></pagination-controls>
+  <pagination
+    [totalItems]="(paginationData$ | async).total"
+    [ngModel]="(paginationData$ | async).currentPage"
+    [maxSize]="(paginationData$ | async).itemsPerPage"
+    (pageChanged)="changePage($event)"
+    [customPreviousTemplate]="prevTemplate"
+    [customNextTemplate]="nextTemplate"
+  >
+  </pagination>
+
+  <ng-template
+    #nextTemplate
+    let-disabled="disabled"
+    let-currentPage="currentPage"
+  >
+    <ng-container>
+      <div class="flex text-neutral-n500 gap-1 items-center">
+        <span> التالي </span>
+        <img src="assets/icons/right-arrow.svg" alt="arrow-next" />
+      </div>
+    </ng-container>
+    <!-- <ng-container *ngIf="disabled"> التالي </ng-container> -->
+  </ng-template>
+
+  <ng-template
+    #prevTemplate
+    let-disabled="disabled"
+    let-currentPage="currentPage"
+  >
+    <div class="flex text-neutral-n500 gap-1 items-center">
+      <img src="assets/icons/left-arrow.svg" alt="arrow-next" />
+      <span> السابق </span>
+    </div>
+    <!-- <ng-container *ngIf="disabled"> السابق </ng-container> -->
+  </ng-template>
 </div>

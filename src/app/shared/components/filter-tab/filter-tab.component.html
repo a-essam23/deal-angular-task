@@ -1,8 +1,11 @@
 <div class="flex w-full gap-4 items-center">
   <div class="gap-4 grid grid-cols-2 w-full">
-    <app-phone-input [phoneNumber]="filters['phone']"></app-phone-input>
+    <app-phone-input
+      [phoneNumber]="filters['phone']"
+      (onPhoneChange)="onPhoneChange($event)"
+    ></app-phone-input>
     <app-search-input [(searchVal)]="filters['name']"></app-search-input>
   </div>
   <button (click)="applyFilters()">تطبيق الفلتر</button>
-  <button>حذف الفلتر</button>
+  <button (click)="deleteFilters()">حذف الفلتر</button>
 </div>

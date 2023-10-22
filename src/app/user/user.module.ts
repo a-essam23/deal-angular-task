@@ -6,7 +6,8 @@ import { UserMessageService } from './user-message.service';
 import { FormsModule } from '@angular/forms';
 import { UserCardListContainerComponent } from './user-card-list-container/user-card-list-container.component';
 import { SharedComponentsModule } from '../shared/components/shared-components.module';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 @NgModule({
   declarations: [
     UserCardComponent,
@@ -17,7 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     FormsModule,
     SharedComponentsModule,
-    NgxPaginationModule,
+    PaginationModule.forRoot(),
   ],
   exports: [
     UserCardComponent,

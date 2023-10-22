@@ -14,7 +14,10 @@ export class FilterTabComponent {
   applyFilters() {
     console.log('filters', this.filters);
   }
-  deleteFilter() {
+  deleteFilters() {
     this.filters = {};
+  }
+  onPhoneChange(val: string) {
+    this.filters = { ...this.filters, phone: val };
   }
 }

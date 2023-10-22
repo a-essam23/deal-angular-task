@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { PaginationInstance } from 'ngx-pagination';
 import {
   BehaviorSubject,
   Subscription,
@@ -38,13 +37,13 @@ interface getUsersToMessageResponse {
   providedIn: 'root',
 })
 export class UserMessageService {
-  allSelected = false;
-
-  private paginationData = new BehaviorSubject<PaginationInstance>({
+  private paginationData = new BehaviorSubject<any>({
     currentPage: 1,
     itemsPerPage: 15,
     id: 'user-message-list',
+    total: 20,
   });
+
   paginationData$ = this.paginationData.asObservable();
 
   private loading = new BehaviorSubject(false);
@@ -57,37 +56,38 @@ export class UserMessageService {
   );
   users$ = this.users.asObservable();
 
-  private pageSubscription: Subscription;
-
-  messageContent = '';
-  selected: string[] = [];
-
+  allSelected$ = this.users$.pipe(
+    map((users) => {
+      const allUsersSelected =
+        users.findIndex((user) => !user.isSelected) === -1;
+      if (allUsersSelected) {
+        return true;
+      } else {
+        return false;
+      }
+    }),
+    startWith(false)
+  );
   // needs to be handeled better
   private token =
     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE2MzhhNjVkYWQxNTNjYTJmMjYwYTQiLCJyb2xlIjoiQURNSU4iLCJzdGF0dXMiOiJBQ1RJVkUiLCJwaG9uZSI6Iis5NjY1MDA4NDQ2NjYiLCJuYW1lIjoi2YXYrdmF2K8g2KfZhNiu2KfZhNiv2YoiLCJpYXQiOjE2ODM1NDk1MTh9.1bcVpARcGX8_WJJT-BXRqXn0jZTfxnH1oarASy9o-EM';
 
   constructor(private http: HttpClient) {
-    // this.pageSubscription = this.paginationData
-    //   .pipe(
-    //     tap((data) =>
-    //       console.log('requesting data for page ', data.currentPage)
-    //     ),
-    //     distinctUntilChanged(
-    //       (prev, current) => prev.currentPage === current.currentPage
-    //     ),
-    //     switchMap((data) => this.getPage(data.currentPage))
-    //   )
-    //   .subscribe((res) => {
-    //     this.users.next(res.data);
-    //     this.paginationData.next({
-    //       ...this.paginationData.value,
-    //       currentPage: res.page,
-    //       totalItems: res.total,
-    //     });
-    //   });
-    this.users$.subscribe((users) => {
-      this.checkIfAllAreSelected(users);
-    });
+    this.paginationData
+      .pipe(
+        distinctUntilChanged(
+          (prev, current) => prev.currentPage === current.currentPage
+        ),
+        switchMap((data) => this.getPage(data.currentPage))
+      )
+      .subscribe((res) => {
+        this.users.next(res.data);
+        // this.paginationData.next({
+        //   ...this.paginationData.value,
+        //   currentPage: res.page,
+        //   totalItems: res.total,
+        // });
+      });
   }
 
   getPage(page: number) {
@@ -104,7 +104,6 @@ export class UserMessageService {
         }
       )
       .pipe(
-        tap((res) => console.log(res)),
         // add isSelected to data
         map((res) => ({
           ...res,
@@ -121,6 +120,10 @@ export class UserMessageService {
   }
 
   selectAllUsers(checked: boolean) {
+    const newusers = this.users.value.map((val) => ({
+      ...val,
+      isSelected: checked,
+    }));
     this.users.next(
       this.users.value.map((val) => ({ ...val, isSelected: checked }))
     );
@@ -135,10 +138,6 @@ export class UserMessageService {
         return val;
       })
     );
-    if (this.selected.includes(user._id)) {
-      return this.selected.push(user._id);
-    }
-    return this.selected.filter((id) => user._id !== id);
   }
 
   changePage(newPage: number) {
@@ -146,16 +145,5 @@ export class UserMessageService {
       ...this.paginationData.value,
       currentPage: newPage,
     });
-  }
-
-  private checkIfAllAreSelected(users: User[]) {
-    const allUsersSelected =
-      users.findIndex((user) => user.isSelected === false) === -1;
-    if (allUsersSelected) {
-      if (!this.allSelected) this.allSelected = true;
-    } else {
-      if (this.allSelected) this.allSelected = false;
-    }
-    console.log('allSelected', this.allSelected);
   }
 }

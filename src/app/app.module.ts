@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { UserModule } from './user/user.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { ToObjPipe } from './shared/pipes/to-obj.pipe';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ToObjPipe],
   imports: [
@@ -18,7 +18,7 @@ import { ToObjPipe } from './shared/pipes/to-obj.pipe';
     UserModule,
     SharedComponentsModule,
     HttpClientModule,
-    NgxPaginationModule,
+    PaginationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

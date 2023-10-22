@@ -9,12 +9,16 @@ import { BehaviorSubject } from 'rxjs';
 export class HomePageComponent {
   modalVisible = new BehaviorSubject(true);
   modalVisible$ = this.modalVisible.asObservable();
-
+  messageContent = '';
+  messageFilters = '';
   send() {
     console.log('sent!');
   }
 
   showModal() {
     this.modalVisible.next(true);
+  }
+  hideModal() {
+    this.modalVisible.next(false);
   }
 }
