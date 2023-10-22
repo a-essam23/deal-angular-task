@@ -4,7 +4,8 @@
     class="h-44"
     label="نص الرسالة"
     placeholder="نص الرسالة"
-    [(textBoxValue)]="content"
+    [textBoxValue]="(content$ | async)!"
+    (textBoxValueChange)="setContent($event)"
   ></app-text-box>
   <app-filter-tab class="w-full"></app-filter-tab>
   <app-user-card-list></app-user-card-list>

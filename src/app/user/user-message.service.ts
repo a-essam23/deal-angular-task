@@ -37,13 +37,15 @@ interface getUsersToMessageResponse {
   providedIn: 'root',
 })
 export class UserMessageService {
+  private messageContent = new BehaviorSubject<string>('');
+  messageContent$ = this.messageContent.asObservable();
+
   private paginationData = new BehaviorSubject<any>({
     currentPage: 1,
     itemsPerPage: 15,
     id: 'user-message-list',
     total: 20,
   });
-
   paginationData$ = this.paginationData.asObservable();
 
   private loading = new BehaviorSubject(false);
@@ -146,4 +148,16 @@ export class UserMessageService {
       currentPage: newPage,
     });
   }
+
+  setMessageContent = (val: string) => {
+    this.messageContent.next(val);
+  };
+
+  sendData = () => {
+    const data = {
+      users: this.users.value.filter((user) => user.isSelected),
+      message: this.messageContent.value,
+    };
+    console.log(data);
+  };
 }

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { UserMessageService } from '../user-message.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
@@ -10,7 +16,8 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class UserCardListContainerComponent implements OnInit {
   paginationData$ = this.userMessageSerivce.paginationData$;
-  content = '';
+  content$ = this.userMessageSerivce.messageContent$;
+  setContent = this.userMessageSerivce.setMessageContent;
 
   constructor(private userMessageSerivce: UserMessageService) {}
   selectAll(val: boolean) {

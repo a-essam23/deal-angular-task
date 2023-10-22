@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UserMessageService } from 'src/app/user/user-message.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,11 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class HomePageComponent {
   modalVisible = new BehaviorSubject(true);
   modalVisible$ = this.modalVisible.asObservable();
-  messageContent = '';
-  messageFilters = '';
-  send() {
-    console.log('sent!');
-  }
+  send = this.userMessageService.sendData;
+
+  constructor(private userMessageService: UserMessageService) {}
 
   showModal() {
     this.modalVisible.next(true);
