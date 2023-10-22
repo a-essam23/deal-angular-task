@@ -6,11 +6,7 @@
     confirmLabel="إرسال"
     (onConfirm)="send()"
   >
-    <ul class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <li *ngFor="let user of users$ | async">
-        <app-user-card [user]="user" (onChange)="onUserSelectChange($event)" ></app-user-card>
-      </li>
-    </ul>
+    <app-user-card-list-container></app-user-card-list-container>
   </app-modal>
   <button
     (click)="showModal()"

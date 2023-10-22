@@ -1,0 +1,75 @@
+.ngx-pagination {
+  @apply flex justify-between items-end border-t border-neutral-n200 w-full #{!important};
+}
+
+.ngx-pagination::before,
+.ngx-pagination::after {
+  content: " " !important;
+  display: table !important;
+}
+
+.ngx-pagination::after {
+  clear: both !important;
+}
+
+.ngx-pagination li {
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  margin-right: 0rem !important;
+  border-radius: 0 !important;
+}
+
+.ngx-pagination li {
+  display: inline-block !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  @apply p-0 pt-4 ps-1 transition text-sm leading-5 font-medium text-neutral-n500 hover:text-neutral-n400 hover:bg-transparent active:text-neutral-n500 #{!important};
+}
+
+.ngx-pagination .current {
+}
+
+.ngx-pagination .disabled {
+  @apply p-0 pt-4 pe-1 transition text-sm leading-5 font-medium text-neutral-n500 #{!important};
+}
+
+.ngx-pagination .pagination-previous.disabled {
+  /* @apply p-0; */
+}
+
+.ngx-pagination .disabled:hover {
+  background: transparent !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  cursor: pointer !important;
+}
+
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before {
+  @apply w-5 h-5 me-3 ms-0 mr-0 text-center #{!important};
+  content: url("../assets/icons/right-arrow.svg") !important;
+}
+
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after {
+  @apply w-5 h-5 ms-3 me-0 #{!important};
+  content: url("../assets/icons/left-arrow.svg") !important;
+}
+
+.ngx-pagination .show-for-sr {
+  /* position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important; */
+}
+
+.ngx-pagination .small-screen {
+  direction: ltr;
+  display: none !important;
+}

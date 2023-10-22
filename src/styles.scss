@@ -1,0 +1,45 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "styles/pagination-override.scss";
+
+html,
+body {
+  font-family: "Cairo", sans-serif;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.checkbox {
+  @apply form-checkbox w-4 h-4 rounded border border-gray-300 bg-white checked:bg-primary-invert checked:invert hover:checked:bg-primary-invert cursor-pointer transition duration-0 ease-in-out checked:focus:bg-primary-invert checked:active:bg-primary-invert active:bg-primary focus:ring-0 focus:ring-offset-0 disabled:brightness-50 disabled:border-transparent;
+}
+
+.input-container {
+  @apply border bg-white border-gray-300 rounded-md shadow-sm py-2 px-3;
+  input {
+    @apply form-input outline-none border-0 text-sm leading-5 font-normal p-0 focus:ring-0 focus:ring-offset-0;
+  }
+}
+
+.input-text {
+  @apply form-input text-sm leading-5 font-normal focus:ring-0 focus:ring-offset-0 focus:border-gray-300 border border-gray-300 rounded-md shadow-sm py-2 px-3;
+}
+
+.input-select {
+  @apply form-select border-0 text-sm leading-5 font-normal p-0 focus:ring-0 focus:ring-offset-0 pl-8;
+  background-position: left 0.5rem center;
+}
+
+.input-textarea {
+  @apply form-textarea text-neutral-n500 text-base leading-6 font-normal border border-neutral-n300 focus:ring-0 focus:ring-offset-0 focus:border-neutral-n300 rounded-md;
+}
+
+.pagination .ngx-pagination .current {
+  background: red;
+}

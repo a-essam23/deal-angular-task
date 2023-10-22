@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-6 h-full">
+  <!-- (textBoxValueChange)="test($event)" -->
+  <app-text-box
+    class="h-44"
+    label="نص الرسالة"
+    placeholder="نص الرسالة"
+    [(textBoxValue)]="content"
+  ></app-text-box>
+  <app-filter-tab class="w-full"></app-filter-tab>
+  <app-user-card-list></app-user-card-list>
+  <pagination-controls
+    class="w-full"
+    (pageChange)="changePage($event)"
+    previousLabel="السابق"
+    nextLabel="التالي"
+    [directionLinks]="true"
+    [responsive]="false"
+  ></pagination-controls>
+</div>

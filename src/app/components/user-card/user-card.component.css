@@ -1,3 +1,0 @@
-input{
-    @apply form-checkbox w-4 h-4 rounded border border-gray-300 bg-white checked:bg-primary hover:checked:bg-primary-hover cursor-pointer transition-colors duration-150 ease-in-out checked:focus:bg-primary focus:ring-0 focus:ring-offset-0;
-}

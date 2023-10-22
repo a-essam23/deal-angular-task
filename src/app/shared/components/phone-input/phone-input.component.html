@@ -1,0 +1,19 @@
+<div class="input-container flex w-full">
+  <select
+    [(ngModel)]="country"
+    (ngModelChange)="onChangeCountry($event)"
+    class="input-select"
+  >
+    <option *ngFor="let c of countryCodes" [ngValue]="c">
+      {{ c.name }}
+    </option>
+  </select>
+  <input
+    [(ngModel)]="number"
+    (ngModelChange)="onChangeNumber($event)"
+    [placeholder]="country['code'] + ' (555) 987-6543'"
+    dir="ltr"
+    type="number"
+    class="grow"
+  />
+</div>
